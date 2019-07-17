@@ -1,0 +1,27 @@
+{
+  "name": "pivotal-js-tests",
+  "version": "1.0.0",
+  "description": "Javascript Rest API Testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js pivotal_tracker/api/features/*.feature"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "repository": " ",
+  "dependencies": {
+    "request": "^2.88.0",
+    "cucumber": "^5.1.0",
+    "module-alias": "^2.2.0",
+    "ajv": "^6.10.2"
+  },
+  "_moduleAliases": {
+    "@core_api": "core/api",
+    "@core_utils": "core/utils",
+    "@pivotal": "pivotal_tracker",
+    "@pivotal_api": "pivotal_tracker/api",
+    "@pivotal_utils": "pivotal_tracker/utils",
+    "@pivotal_schemas": "pivotal_tracker/api/features/schemas"
+  }
+}

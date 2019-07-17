@@ -1,0 +1,16 @@
+{
+  "base": "",
+  "headers": {
+    "X-TrackerToken": "",
+    "Content-Type": ""
+  },
+  "prefix": "",
+  "user": {
+    "owner": {
+      "id": "",
+      "token": "",
+      "username": "",
+      "password": ""
+    }
+  }
+}

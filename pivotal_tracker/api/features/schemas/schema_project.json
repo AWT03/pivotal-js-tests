@@ -1,0 +1,117 @@
+{
+  "title": "New Project",
+  "description": "New project response schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique identifier for the new project",
+      "type": "integer"
+    },
+    "kind": {
+      "description": "The kind of object that was created",
+      "type": "string",
+      "const": "project"
+    },
+    "name": {
+      "description": "The unique name for the new project",
+      "type": "string"
+    },
+    "version": {
+      "description": "Version of the new project",
+      "type": "number"
+    },
+    "iteration_length": {
+      "type": "integer"
+    },
+    "week_start_day": {
+      "oneOf": [
+        {"const": "Monday"},
+        {"const": "Tuesday"},
+        {"const": "Wednesday"},
+        {"const": "Thursday"},
+        {"const": "Friday"},
+        {"const": "Saturday"},
+        {"const": "Sunday"}
+      ]
+    },
+    "point_scale": {
+      "type": "string"
+    },
+    "point_scale_is_custom": {
+      "type": "boolean"
+    },
+    "bugs_and_chores_are_estimatable": {
+      "type": "boolean"
+    },
+    "automatic_planning": {
+      "type": "boolean"
+    },
+    "enable_tasks": {
+      "type": "boolean"
+    },
+    "time_zone": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "time_zone"
+        },
+        "olson_name": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "string"
+        }
+      }
+    },
+    "velocity_averaged_over": {
+      "type": "integer"
+    },
+    "number_of_done_iterations_to_show": {
+      "type": "integer"
+    },
+    "has_google_domain": {
+      "type": "boolean"
+    },
+    "enable_incoming_emails": {
+      "type": "boolean"
+    },
+    "initial_velocity": {
+      "type": "integer"
+    },
+    "public": {
+      "type": "boolean"
+    },
+    "atom_enabled": {
+      "type": "boolean"
+    },
+    "project_type": {
+      "type": "string",
+      "oneOf": [
+        {"const": "private"},
+        {"const": "public"}
+      ]
+    },
+    "start_time": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "account_id": {
+      "type": "integer"
+    },
+    "current_iteration_number": {
+      "type": "integer"
+    },
+    "enable_following": {
+      "type": "boolean"
+    }
+  },
+  "required": [ "id" ],
+  "minProperties": 26,
+  "maxProperties": 27
+}

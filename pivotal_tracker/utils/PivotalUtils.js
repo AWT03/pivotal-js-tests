@@ -2,6 +2,7 @@ require('module-alias/register');
 const {ReadJsonFromFile} = require(`@core_utils/Common.js`);
 const PivotalTrackerDir = require(`@pivotal/PivotalTrackerDir.js`);
 const PivotalTrackerApi = require(`@pivotal_api/PivotalTrackerApi.js`);
+const Promise = require('bluebird');
 
 
 /**
@@ -22,10 +23,10 @@ async function DeleteObjects(username, tag) {
     await api.build_end_point(tag+'s', []);
     await api.do_request('GET', "", headers);
     let current_projects = JSON.parse(api.full_response);
-    current_projects.forEach((value, index) => {
+    return Promise.map(current_projects, async value => {
         if (value["name"].includes(api.config["prefix"])) {
             api.build_end_point(tag, [value["id"]]);
-            api.do_request('DELETE', "", headers)
+            await api.do_request('DELETE', "", headers)
         }
     });
 }

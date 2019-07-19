@@ -36,7 +36,6 @@ Feature: Projects
       | name                                 |
       | (prefix)_project1_(current_datetime) |
       | (prefix)_project2_(current_datetime) |
-      | (prefix)_project3_(current_datetime) |
     And I send a GET request to projects
     Then I expect the status code is 200
-    And I expect the response is a list that contains 3 new projects
+    And I expect the response is a list that contains 2 new projects

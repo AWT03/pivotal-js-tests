@@ -31,12 +31,13 @@ When('I click on {string} button', async (action) => {
 });
 
 When('I fill the form with data', async (table) => {
-    let set_values = {}
+    let setValues = {}
     let tableKeyValuesData = table.rowsHash();
     for(let key in tableKeyValuesData){
         let value = tableKeyValuesData[key];
         value = FormatString(value);
-        set_values[key] = value;
+        setValues[key] = value;
     }
-    this.page.setForm(set_values);
+    this.page.setForm(setValues);
+
 });

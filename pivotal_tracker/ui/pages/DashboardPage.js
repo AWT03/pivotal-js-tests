@@ -1,9 +1,8 @@
 require('module-alias/register');
-const Many = require('extends-classes')
 const ActionPage = require('@core_ui/pages/ActionPage.js');
 const ProjectFormPage = require('@pivotal_ui/pages/ProjectFormPage.js');
 
-class DashboardPage extends Many(ActionPage) {
+class DashboardPage extends ActionPage {
 
     constructor() {
         super();

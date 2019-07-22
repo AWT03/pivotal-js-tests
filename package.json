@@ -12,9 +12,15 @@
   "repository": " ",
   "dependencies": {
     "request": "^2.88.0",
+    "ajv": "^6.10.2",
     "cucumber": "^5.1.0",
+    "dateformat": "^3.0.3",
+    "extends-classes": "^1.0.5",
     "module-alias": "^2.2.0",
-    "ajv": "^6.10.2"
+    "wdio-cucumber-framework": "^2.2.8",
+    "wdio-selenium-standalone-service": "0.0.12",
+    "wdio-spec-reporter": "^0.1.5",
+    "webdriverio": "^4.13.0"
   },
   "_moduleAliases": {
     "@core_api": "core/api",
@@ -22,6 +28,8 @@
     "@pivotal": "pivotal_tracker",
     "@pivotal_api": "pivotal_tracker/api",
     "@pivotal_utils": "pivotal_tracker/utils",
-    "@pivotal_schemas": "pivotal_tracker/api/features/schemas"
+    "@pivotal_schemas": "pivotal_tracker/api/features/schemas",
+    "@pivotal_ui": "pivotal_tracker/ui",
+    "@core_ui": "core/ui"
   }
 }

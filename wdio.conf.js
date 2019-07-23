@@ -221,7 +221,7 @@ exports.config = {
         let allTags = scenario.tags;
         for (let tag in allTags) {
             let tag_only = allTags[tag];
-            if(tag_only.name == "@clean_projects"){
+            if(tag_only.name === "@clean_projects"){
                 DeleteObjects("owner","project");
             }
         }

@@ -56,7 +56,7 @@ class ProjectFormPage extends Many(FormPage, ActionPage) {
     }
 
     selectProjectPrivacy(projectPrivacy){
-        let projectPrivacyConvert = (projectPrivacy == 'true')? 'private' :'public';
+        let projectPrivacyConvert = (projectPrivacy === 'true')? 'private' :'public';
         let projectPrivacyInput = this.projectPrivacySelector.replace('($privacy)', projectPrivacyConvert)
         browser.element(projectPrivacyInput).click();
     }

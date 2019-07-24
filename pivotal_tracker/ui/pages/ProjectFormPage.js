@@ -19,6 +19,7 @@ class ProjectFormPage extends Many(FormPage, ActionPage) {
                 this.selectProjectPrivacy(projectPrivacy);
             }
         }
+
         this.actions = {
             "Create": () => {
                 return this.clickCreateButton();

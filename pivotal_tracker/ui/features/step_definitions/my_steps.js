@@ -27,7 +27,7 @@ Given('I login the app as "{word}"', async (user) => {
     this.page = this.page.doAction("Sign In");
 });
 
-/*When('I click on {string} button', async (action) => {
+/*hen('I click on {string} button', async (action) => {
     this.page = this.page.doAction(action);
 });
 

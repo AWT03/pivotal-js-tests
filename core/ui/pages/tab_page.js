@@ -5,8 +5,10 @@ class TabPage extends Element{
 
     constructor(){
         super();
-        this.tabs ={};
-        this.tab = null;
+        this.tabs ={
+
+        };
+        //this.tab = {} ;
     }
 
     update_tabs(tabs){
@@ -14,20 +16,23 @@ class TabPage extends Element{
             this.tabs[tag]  = tabs[tag]
     }
 
-    go_to(tab){
+    /*go_to(tab){
         this.tabs[tab]()
     }
 
-    get_tab(hags){
-        return this.tab
-    }
-
     do_action(value){
-        let switch_tab = this.tab.do_action(value);
+        var switch_tab;
+        switch_tab = this.tab.do_action(value);
         if (switch_tab in this.tabs){
             this.go_to(switch_tab);
             return '';
         }
         return switch_tab;
     }
+
+    get_tab(){
+        return this.tab
+    }*/
 }
+
+module.exports = TabPage;

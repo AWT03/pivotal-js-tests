@@ -1,5 +1,5 @@
 require('module-alias/register');
-const Many = require('extends-classes')
+const Many = require('extends-classes');
 const FormPage = require('@core_ui/pages/form_page.js');
 const ActionPage = require('@core_ui/pages/action_page.js');
 const UserPage = require('@pivotal_ui/pages/user_page.js');
@@ -14,7 +14,7 @@ class LoginPage extends Many(FormPage, ActionPage) {
         super();
         this.fields = {
             "sign_in_as": (username) => {
-                this.set_username(username)
+                this.setUsername(username)
             },
             "password": (password) => {
                 browser.setValue(password_field, password)
@@ -22,19 +22,19 @@ class LoginPage extends Many(FormPage, ActionPage) {
         }
         this.actions = {
             "Sign In": () => {
-                return this.sign_in();
+                return this.signIn();
             }
         }
         this.updateFormFields(this.fields);
         this.updateActions(this.actions);
     }
 
-    set_username( username){
+    setUsername( username){
         browser.setValue(username_field, username);
         browser.click(signin_button)
     }
 
-    sign_in(){
+    signIn(){
         browser.click(signin_button)
         return new UserPage();
     }

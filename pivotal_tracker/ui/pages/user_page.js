@@ -1,74 +1,75 @@
 require('module-alias/register');
-const Many = require('extends-classes')
+const Many = require('extends-classes');
 const TabPage = require('@core_ui/pages/tab_page.js');
 const ElementSearch = require('@core_ui/pages/element_search.js');
-const DashboardPage = require('@pivotal_ui/pages/dashboard_page.js');
-const ProjectMain = require('@pivotal_ui/pages/project_main_page.js');
+const DashboardPage = require('@pivotal_ui/pages/dashboard/dash.js');
+/*const ProjectMain = require('@pivotal_ui/pages/project_view/project_main_page.js');
 const ProjectAll = require('@pivotal_ui/pages/project_all_page.js');
-const ProjectCreationForm = require('@pivotal_ui/pages/project_creation_form.js');
+const ProjectCreationForm = require('@pivotal_ui/pages/project_creation_form.js');*/
 
-let go_dashboard_button = '.headerLogo__image'
-let projects_dropdown_list = '.tc_projects_dropdown_link.tc_context_name'
-let header_name = '//span[text()="$(expected_name)"]'
-let header_privacy = '//span[text()="($(privacy))"]'
-let show_all_projects_button = '//span[text()="Show All Projects"]'
+let go_dashboard_button = '.headerLogo__image';
+let projects_dropdown_list = '.tc_projects_dropdown_link.tc_context_name';
+let header_name = '//span[text()="$(expected_name)"]';
+let header_privacy = '//span[text()="($(privacy))"]';
+let show_all_projects_button = '//span[text()="Show All Projects"]';
 
 class UserPage extends Many(TabPage, ElementSearch){
+
     constructor(){
         super();
         this.search_elements = {
             "header_name": (name) => {
-                this.validate_header_name(name)
+                this.validateHeaderName(name)
             },
-            "header_privacy": (username) => {
-                this.validate_header_privacy(username)
+            "header_privacy": (privacy) => {
+                this.validateHeaderPrivacy(privacy)
 
             }
         }
         this.tabs = {
             "Dashboard": () => {
-                return this.get_dashboard_tab();
+                this.getDashboardTab();
             },
             "ProjectMain": () => {
-                return this.get_project_main_tab();
+                this.getProjectMainTab();
             },
             "AllProjects": () => {
-                return this.get_all_projects();
+                this.getAllProjects();
             },
             "ProjectCreation": () => {
-                return this.get_project_creation_form();
+                this.getProjectCreationForm();
             }
         }
-        this.tab = new DashboardPage;
+        //this.tab = DashboardPage;
 
     }
 
-    get_dashboard_tab(){
-        browser.click(go_dashboard_button);
-        this.tab = DashboardPage;
+    getDashboardTab(){
+        //browser.click(go_dashboard_button);
+        //this.tab = DashboardPage;
     }
 
-    get_project_main_tab(){
-        this.tab = ProjectMain;
+    getProjectMainTab(){
+        //this.tab = ProjectMain;
     }
 
-    get_all_projects(){
-        browser.click(projects_dropdown_list)
-        browser.click(show_all_projects_button)
-        this.tab = ProjectAll;
+    getAllProjects(){
+        //browser.click(projects_dropdown_list);
+        //browser.click(show_all_projects_button);
+        //this.tab = ProjectAll;
     }
 
-    get_project_creation_form(){
-        this.tab = ProjectCreationForm;
+    getProjectCreationForm(){
+        //this.tab = ProjectCreationForm;
     }
 
-    validate_header_name(){
+    validateHeaderName(){
         return browser.isExisting(header_name.replace('$(expected_name)', name))
     }
 
-    validate_header_privacy(){
+    validateHeaderPrivacy(){
         return browser.isExisting(header_privacy.replace('$(privacy)', privacy))
     }
 }
 
-exports.module = UserPage;
+module.exports = UserPage;

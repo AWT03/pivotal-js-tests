@@ -1,5 +1,10 @@
-class ElementSearch{
+require('module-alias/register');
+const Element = require('@core_ui/pages/element.js');
+
+class ElementSearch extends Element{
+
     constructor(){
+        super();
         this.search_elements = {};
     }
     update_search_fields(fields){

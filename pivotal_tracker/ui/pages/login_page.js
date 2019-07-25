@@ -2,7 +2,11 @@ require('module-alias/register');
 const Many = require('extends-classes')
 const FormPage = require('@core_ui/pages/form_page.js');
 const ActionPage = require('@core_ui/pages/action_page.js');
-const DashboardPage = require('@pivotal_ui/pages/user_page.js');
+const UserPage = require('@pivotal_ui/pages/user_page.js');
+
+let username_field = '#credentials_username';
+let password_field = '#credentials_password';
+let signin_button = '.app_signin_action_button';
 
 class LoginPage extends Many(FormPage, ActionPage) {
 
@@ -10,45 +14,29 @@ class LoginPage extends Many(FormPage, ActionPage) {
         super();
         this.fields = {
             "sign_in_as": (username) => {
-                this.clickNextButton(username);
+                this.set_username(username)
             },
             "password": (password) => {
-                this.passwordInput.setValue(password);
+                browser.setValue(password_field, password)
             }
         }
         this.actions = {
             "Sign In": () => {
-                return this.clickSignInButton();
+                return this.sign_in();
             }
         }
         this.updateFormFields(this.fields);
         this.updateActions(this.actions);
     }
 
-    get usernameInput() {
-        return browser.element('#credentials_username');
+    set_username( username){
+        browser.setValue(username_field, username);
+        browser.click(signin_button)
     }
 
-    get nextButton() {
-        return browser.element('.app_signin_action_button');
-    }
-
-    get passwordInput() {
-        return browser.element('#credentials_password');
-    }
-
-    get loginButton() {
-        return browser.element('.app_signin_action_button');
-    }
-
-    clickNextButton(username) {
-        this.usernameInput.setValue(username);
-        this.nextButton.click();
-    }
-
-    clickSignInButton() {
-        this.loginButton.click();
-        return new DashboardPage();
+    sign_in(){
+        browser.click(signin_button)
+        return new UserPage();
     }
 }
 

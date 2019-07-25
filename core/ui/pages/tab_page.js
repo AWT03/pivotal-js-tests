@@ -1,6 +1,10 @@
-class TabPage{
+require('module-alias/register');
+const Element = require('@core_ui/pages/element.js');
+
+class TabPage extends Element{
 
     constructor(){
+        super();
         this.tabs ={};
         this.tab = null;
     }

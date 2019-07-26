@@ -1,7 +1,8 @@
 require('module-alias/register');
 const Element = require('@core_ui/pages/element.js');
+const ActionPage = require('@core_ui/pages/action_page.js');
 
-class TabPage extends Element{
+class TabPage extends ActionPage{
 
     constructor(){
         super();

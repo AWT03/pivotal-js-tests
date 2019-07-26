@@ -15,7 +15,11 @@ class DashboardPage extends TabPage{
                 this.getWorkspacesTab();
             }
         }
-        this.tab = DashboardProjects;
+        this.tab = new DashboardProjects();
+    }
+
+    doAction(value) {
+        return super.doAction(value);
     }
 
     getProjectsTab(){

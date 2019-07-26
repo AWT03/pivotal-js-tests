@@ -26,12 +26,12 @@ Given('I login the app as "{word}"', async (user) => {
     this.page = this.page.doAction("Sign In");
 });
 
-When('I click on {string} button', async (action) => {
-    this.page = this.page.doAction(action);
-});
+// When('I click on {string} button', async (action) => {
+//     this.page = this.page.doAction(action);
+// });
 
 When('I fill the form with data', async (table) => {
-    this.setValues = {}
+    this.setValues = {};
     let tableKeyValuesData = table.rowsHash();
     for(let key in tableKeyValuesData){
         let value = tableKeyValuesData[key];
@@ -39,14 +39,26 @@ When('I fill the form with data', async (table) => {
         this.setValues[key] = value;
     }
     this.page.doAction("Create Project");
-    this.page.goTo("ProjectCreation");
+    //this.page.goTo("ProjectCreation");
     this.page.getTab().setForm(this.setValues);
+    this.page.doAction("Create");
 });
 
-When('I go to {navigation}', async (navigation) => {
-    this.tab_level = (navigation.split('->')).length;
-    for(tab in this.tab_level) {
-        eval("context.page" + ''.join(index*['.get_tab()']) + ".go_to(tab)");
+
+When('I create a story with', async (table) => {
+    this.setValues = {};
+    let tableKeyValuesData = table.rowsHash();
+    for(let key in tableKeyValuesData){
+        let value = tableKeyValuesData[key];
+        value = FormatString(value);
+        this.setValues[key] = value;
     }
+    this.page.doAction("Add Story");
+    //this.page.goTo("ProjectCreation");
+    this.page.getTab().setForm(this.setValues);
+    this.page.doAction("Save");
 });
+
+
+
 

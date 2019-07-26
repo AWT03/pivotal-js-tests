@@ -40,17 +40,17 @@ class UserPage extends Many(TabPage, ElementSearch){
                 this.getProjectCreationForm();
             }
         }
-        this.tab = DashboardPage;
+        this.tab = new DashboardPage();
 
     }
 
     getDashboardTab(){
         browser.click(go_dashboard_button);
-        this.tab = DashboardPage;
+        this.tab = new DashboardPage();
     }
 
     getProjectMainTab(){
-        this.tab = ProjectMain;
+        this.tab = new ProjectMain();
     }
 
     getAllProjects(){
@@ -60,7 +60,7 @@ class UserPage extends Many(TabPage, ElementSearch){
     }
 
     getProjectCreationForm(){
-        //this.tab = ProjectCreationForm;
+        this.tab = new ProjectCreationForm();
     }
 
     validateHeaderName(){

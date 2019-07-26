@@ -29,6 +29,7 @@ class DashboardProjects extends Many(ElementSearch, ActionPage){
         this.updateActions(this.actions);
         this.updateSearchFields(this.search_elements);
     }
+
     openCreateProjectForm(){
         browser.click(create_project_button);
         return "ProjectCreation";

@@ -13,17 +13,17 @@ class DashboardProjects extends Many(ElementSearch, ActionPage){
 
     constructor(){
         super();
-        /*this.search_elements = {
+        this.search_elements = {
             "projects_dashboard": () => {
                 return this.projectExists();
             },
             "projects_counter": () => {
                 return this.projectCounter();
             }
-        }*/
+        }
         this.actions = {
             "Create Project": () => {
-                return this.openCreateProjectForm();
+                this.openCreateProjectForm();
             }
         }
         this.updateActions(this.actions);
@@ -34,13 +34,13 @@ class DashboardProjects extends Many(ElementSearch, ActionPage){
         return "ProjectCreation";
     }
 
-    /*projectExists(){
+    projectExists(){
         return browser.isExisting(project_name_reference.replace('$(project_name)', name));
     }
 
     projectCounter(){
         return browser.isExisting(project_counter.replace('$(counter)', counter));
-    }*/
+    }
     //numberOfProjects(){
 
     //}

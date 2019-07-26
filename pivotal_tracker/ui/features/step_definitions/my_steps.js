@@ -1,6 +1,5 @@
 require('module-alias/register');
 const {Given, When, Then} = require('cucumber');
-const HomePage = require('@pivotal_ui/pages/HomePage.js');
 const LoginPage = require('@pivotal_ui/pages/login_page.js');
 const assert = require('assert');
 const {ReadFileConfigPivotal} = require(`@pivotal_utils/PivotalUtils.js`);
@@ -27,18 +26,27 @@ Given('I login the app as "{word}"', async (user) => {
     this.page = this.page.doAction("Sign In");
 });
 
-/*hen('I click on {string} button', async (action) => {
+When('I click on {string} button', async (action) => {
     this.page = this.page.doAction(action);
 });
 
 When('I fill the form with data', async (table) => {
-    let setValues = {}
+    this.setValues = {}
     let tableKeyValuesData = table.rowsHash();
     for(let key in tableKeyValuesData){
         let value = tableKeyValuesData[key];
         value = FormatString(value);
-        setValues[key] = value;
+        this.setValues[key] = value;
     }
-    this.page.setForm(setValues);
+    this.page.doAction("Create Project");
+    this.page.goTo("ProjectCreation");
+    this.page.getTab().setForm(this.setValues);
+});
 
-});*/
+When('I go to {navigation}', async (navigation) => {
+    this.tab_level = (navigation.split('->')).length;
+    for(tab in this.tab_level) {
+        eval("context.page" + ''.join(index*['.get_tab()']) + ".go_to(tab)");
+    }
+});
+

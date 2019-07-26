@@ -2,10 +2,10 @@ require('module-alias/register');
 const Many = require('extends-classes');
 const TabPage = require('@core_ui/pages/tab_page.js');
 const ElementSearch = require('@core_ui/pages/element_search.js');
-const DashboardPage = require('@pivotal_ui/pages/dashboard/dash.js');
-/*const ProjectMain = require('@pivotal_ui/pages/project_view/project_main_page.js');
-const ProjectAll = require('@pivotal_ui/pages/project_all_page.js');
-const ProjectCreationForm = require('@pivotal_ui/pages/project_creation_form.js');*/
+const DashboardPage = require('@pivotal_ui/pages/dashboard/dashboard_page.js');
+const ProjectMain = require('@pivotal_ui/pages/project_view/project_main.js');
+const ProjectAll = require('@pivotal_ui/pages/project_view/projects_all.js');
+const ProjectCreationForm = require('@pivotal_ui/pages/pop_ups/project_creation_form.js');
 
 let go_dashboard_button = '.headerLogo__image';
 let projects_dropdown_list = '.tc_projects_dropdown_link.tc_context_name';
@@ -40,17 +40,17 @@ class UserPage extends Many(TabPage, ElementSearch){
                 this.getProjectCreationForm();
             }
         }
-        //this.tab = DashboardPage;
+        this.tab = DashboardPage;
 
     }
 
     getDashboardTab(){
-        //browser.click(go_dashboard_button);
-        //this.tab = DashboardPage;
+        browser.click(go_dashboard_button);
+        this.tab = DashboardPage;
     }
 
     getProjectMainTab(){
-        //this.tab = ProjectMain;
+        this.tab = ProjectMain;
     }
 
     getAllProjects(){

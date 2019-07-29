@@ -1,9 +1,9 @@
 require('module-alias/register');
-const TabPage = require('@core_ui/pages/tab_page.js');
-const ProjectAnalytics = require('@pivotal_ui/pages/project_view/project_analytics.js');
-const ProjectMembers = require('@pivotal_ui/pages/project_view/project_members.js');
-const ProjectMore = require('@pivotal_ui/pages/project_view/project_more.js');
-const StoriesPage = require('@pivotal_ui/pages/stories/stories_page.js');
+const TabPage = require('@core_ui/pages/TabPage.js');
+const ProjectAnalytics = require('@pivotal_ui/pages/project_view/ProjectAnalytics.js');
+const ProjectMembers = require('@pivotal_ui/pages/project_view/ProjectMembers.js');
+const ProjectMore = require('@pivotal_ui/pages/project_view/ProjectMore.js');
+const StoriesPage = require('@pivotal_ui/pages/stories/StoriesPage.js');
 
 let project_stories_tab = '[data-aid="navTab-stories"]';
 let project_analytics_tab = '[data-aid="navTab-analytics"]';

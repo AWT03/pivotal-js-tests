@@ -1,7 +1,7 @@
 require('module-alias/register');
 const Many = require('extends-classes');
-const FormPage = require('@core_ui/pages/form_page.js');
-const ActionPage = require('@core_ui/pages/action_page.js');
+const FormPage = require('@core_ui/pages/FormPage.js');
+const ActionPage = require('@core_ui/pages/ActionPage.js');
 
 
 let add_story_backlog = 'div[id*="panel_backlog"] a[class*="FirstStoryAddButton"]';
@@ -35,6 +35,12 @@ class StoriesBacklog extends Many(FormPage, ActionPage){
             },
             "Task": () => {
                 browser.click(add_task);
+            },
+            "story_creation": (value) => {
+                browser.setValue(story_title, value);
+            },
+            "task_creation": () => {
+                this.setTask();
             }
         }
         this.fields = {
@@ -47,7 +53,6 @@ class StoriesBacklog extends Many(FormPage, ActionPage){
         }
         this.updateFormFields(this.fields);
         this.updateActions(this.actions);
-        //this.updateSearchFields(this.search_elements);
     }
 
     setTask(value){

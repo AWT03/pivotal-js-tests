@@ -1,5 +1,5 @@
 require('module-alias/register');
-const Element = require('@core_ui/pages/element.js');
+const Element = require('@core_ui/pages/Element.js');
 
 class ElementSearch extends Element{
 

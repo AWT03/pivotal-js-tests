@@ -1,8 +1,8 @@
 require('module-alias/register');
 const Many = require('extends-classes');
-const ElementSearch = require('@core_ui/pages/element_search.js');
-const ActionPage = require('@core_ui/pages/action_page.js');
-const UserMainTabs = require('@pivotal_ui/pages/user_page.js');
+const ElementSearch = require('@core_ui/pages/ElementSearch.js');
+const ActionPage = require('@core_ui/pages/ActionPage.js');
+const UserMainTabs = require('@pivotal_ui/pages/UserPage.js');
 
 let create_project_button = 'button[id="create-project-button"]';
 let project_name_reference = '//a[text()="$(project_name)"]';

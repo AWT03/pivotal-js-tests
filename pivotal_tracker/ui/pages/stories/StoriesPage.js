@@ -1,6 +1,6 @@
 require('module-alias/register');
-const TabPage = require('@core_ui/pages/tab_page.js');
-const StoriesBacklog = require('@pivotal_ui/pages/stories/stories_backlog.js');
+const TabPage = require('@core_ui/pages/TabPage.js');
+const StoriesBacklog = require('@pivotal_ui/pages/stories/StoriesBacklog.js');
 
 
 class StoriesPage extends (TabPage){

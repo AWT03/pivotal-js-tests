@@ -1,10 +1,11 @@
 require('module-alias/register');
 const {Given, When, Then} = require('cucumber');
-const LoginPage = require('@pivotal_ui/pages/login_page.js');
+const LoginPage = require('@pivotal_ui/pages/LoginPage.js');
 const assert = require('assert');
 const {ReadFileConfigPivotal} = require(`@pivotal_utils/PivotalUtils.js`);
 const {FormatString} = require(`@pivotal_utils/PivotalUtils.js`);
 const {SetupMainUrl} = require(`@core_utils/SetupBrowser.js`);
+const EndpointSaved = require('@core_ui/EndpointSaved.js');
 
 Given('I login the app as "{word}"', async (user) => {
     let config = ReadFileConfigPivotal();
@@ -41,26 +42,27 @@ When('I fill the form with data', async (table) => {
 
 
 When('I create a story with', async (table) => {
-    let setValues = {};
-    let tableKeyValuesData = table.rowsHash();
-    for(let key in tableKeyValuesData){
-        let value = tableKeyValuesData[key];
-        value = FormatString(value);
-        setValues[key] = value;
-    }
+    this.page.goTo("ProjectMain");
+    this.page.getTab().goTo("Stories");
+    // this.setValues = {}
+    // let tableKeyValuesData = table.rowsHash();
+    // for(let key in tableKeyValuesData){
+    //     let value = tableKeyValuesData[key];
+    //     value = FormatString(value);
+    //     this.setValues[key] = value;
+    // }
+    this.setValues = {
+        "story_title": "AWT03_story",
+    };
     this.page.doAction("Add Story");
     browser.pause(1000);
-    this.page.setForm(setValues);
-    //this.page.goTo("ProjectCreation");
-    //this.page.getTab().setForm(this.setValues);
-    //this.page.setForm(this.setValues);
-    //this.page.doAction("Save");
-    browser.pause(1000);
+    this.page.doAction(this.setValue);
+    this.page.setForm(this.setValues)
+    browser.pause(3000);
 });
 
 
-Given('I go to "{string}"', async (navigation) => {
-    console.log(navigation);
+Given('I go to "{word}"', async (navigation) => {
     //this.tab_level = (navigation.split("-")).length;
     // for (let [index, tab] of (navigation.split("-")).entries()){
     //     eval("this.page"+ (index['.get_tab()']).join("")+ '.go_to(tab)');

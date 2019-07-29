@@ -1,5 +1,5 @@
 require('module-alias/register');
-const Many = require('extends-classes')
+const Many = require('extends-classes');
 const FormPage = require('@core_ui/pages/form_page.js');
 const ActionPage = require('@core_ui/pages/action_page.js');
 const UserMainTabs = require('@pivotal_ui/pages/user_page.js');
@@ -17,7 +17,7 @@ class ProjectCreationForm extends Many(FormPage, ActionPage){
     constructor(){
         super();
         this.fields = {
-            "project_name ": (value) => {
+            "project_name": (value) => {
                 browser.setValue(project_name_field, value);
             },
             "account": (value) => {
@@ -28,14 +28,17 @@ class ProjectCreationForm extends Many(FormPage, ActionPage){
             }
         }
         this.actions = {
-            "Create ": () => {
+            "Create": () => {
                 this.createProjec();
             }
         }
+        this.updateFormFields(this.fields);
+        this.updateActions(this.actions);
     }
 
     setAccount(value){
         browser.click(account_selector_field);
+        browser.pause(1000);
         browser.click(account_selected.replace('$(name)', value));
     }
 
@@ -61,7 +64,8 @@ class ProjectCreationForm extends Many(FormPage, ActionPage){
 
     createProjec(){
         browser.click(create_button);
-        browser.waitForVisible(background_div);
+        //browser.waitForVisible(background_div);
+        browser.pause(15000);
         return "ProjectMain";
     }
 }

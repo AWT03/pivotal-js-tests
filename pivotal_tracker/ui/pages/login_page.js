@@ -35,7 +35,7 @@ class LoginPage extends Many(FormPage, ActionPage) {
     }
 
     signIn(){
-        browser.click(signin_button)
+        browser.click(signin_button);
         return new UserPage();
     }
 }

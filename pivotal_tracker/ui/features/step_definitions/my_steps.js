@@ -12,8 +12,6 @@ Given('I login the app as "{word}"', async (user) => {
     SetupMainUrl(path);
     let login_page = new LoginPage;
     this.page = login_page;
-    //this.page.doAction('Log In');
-    //this.page = loginPage;
     let config_user = config["user"];
     let config_type_user = config_user[user];
     let config_user_username = config_type_user["username"];
@@ -26,12 +24,9 @@ Given('I login the app as "{word}"', async (user) => {
     this.page = this.page.doAction("Sign In");
 });
 
-// When('I click on {string} button', async (action) => {
-//     this.page = this.page.doAction(action);
-// });
 
 When('I fill the form with data', async (table) => {
-    this.setValues = {};
+    this.setValues = {}
     let tableKeyValuesData = table.rowsHash();
     for(let key in tableKeyValuesData){
         let value = tableKeyValuesData[key];
@@ -39,26 +34,37 @@ When('I fill the form with data', async (table) => {
         this.setValues[key] = value;
     }
     this.page.doAction("Create Project");
-    //this.page.goTo("ProjectCreation");
+    this.page.goTo("ProjectCreation");
     this.page.getTab().setForm(this.setValues);
     this.page.doAction("Create");
 });
 
 
 When('I create a story with', async (table) => {
-    this.setValues = {};
+    let setValues = {};
     let tableKeyValuesData = table.rowsHash();
     for(let key in tableKeyValuesData){
         let value = tableKeyValuesData[key];
         value = FormatString(value);
-        this.setValues[key] = value;
+        setValues[key] = value;
     }
     this.page.doAction("Add Story");
+    browser.pause(1000);
+    this.page.setForm(setValues);
     //this.page.goTo("ProjectCreation");
-    this.page.getTab().setForm(this.setValues);
-    this.page.doAction("Save");
+    //this.page.getTab().setForm(this.setValues);
+    //this.page.setForm(this.setValues);
+    //this.page.doAction("Save");
+    browser.pause(1000);
 });
 
 
-
-
+Given('I go to "{string}"', async (navigation) => {
+    console.log(navigation);
+    //this.tab_level = (navigation.split("-")).length;
+    // for (let [index, tab] of (navigation.split("-")).entries()){
+    //     eval("this.page"+ (index['.get_tab()']).join("")+ '.go_to(tab)');
+    // }
+    eval("this.page"+ '.goTo("ProjectMain")');
+    eval("this.page"+ ".getTab()"+ '.goTo("Stories")');
+});

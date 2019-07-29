@@ -12,6 +12,6 @@ Feature: Project
       | project_name | (prefix)_project_(current_datetime) |
       | account      | (prefix)_account                    |
       | privacy      | true                                |
-    When I create a story with
-      | key         | value                              |
-      | story_title | (prefix)_story_(current_date_time) |
+    And I go to "hola"
+    And I create a story with
+      |story_title| (prefix)_story_(current_date_time) |

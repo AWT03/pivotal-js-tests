@@ -40,33 +40,3 @@ When('I fill the form with data', async (table) => {
     this.page.doAction("Create");
 });
 
-
-When('I create a story with', async (table) => {
-    this.page.goTo("ProjectMain");
-    this.page.getTab().goTo("Stories");
-    // this.setValues = {}
-    // let tableKeyValuesData = table.rowsHash();
-    // for(let key in tableKeyValuesData){
-    //     let value = tableKeyValuesData[key];
-    //     value = FormatString(value);
-    //     this.setValues[key] = value;
-    // }
-    this.setValues = {
-        "story_title": "AWT03_story",
-    };
-    this.page.doAction("Add Story");
-    browser.pause(1000);
-    this.page.doAction(this.setValue);
-    this.page.setForm(this.setValues)
-    browser.pause(3000);
-});
-
-
-Given('I go to "{word}"', async (navigation) => {
-    //this.tab_level = (navigation.split("-")).length;
-    // for (let [index, tab] of (navigation.split("-")).entries()){
-    //     eval("this.page"+ (index['.get_tab()']).join("")+ '.go_to(tab)');
-    // }
-    eval("this.page"+ '.goTo("ProjectMain")');
-    eval("this.page"+ ".getTab()"+ '.goTo("Stories")');
-});

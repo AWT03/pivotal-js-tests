@@ -2,7 +2,6 @@ require('module-alias/register');
 const Many = require('extends-classes');
 const ElementSearch = require('@core_ui/pages/ElementSearch.js');
 const ActionPage = require('@core_ui/pages/ActionPage.js');
-const UserMainTabs = require('@pivotal_ui/pages/UserPage.js');
 
 let create_project_button = 'button[id="create-project-button"]';
 let project_name_reference = '//a[text()="$(project_name)"]';
@@ -43,9 +42,7 @@ class DashboardProjects extends Many(ElementSearch, ActionPage){
     projectCounter(){
         return browser.isExisting(project_counter.replace('$(counter)', counter));
     }
-    //numberOfProjects(){
 
-    //}
 }
 
 module.exports = DashboardProjects;

@@ -54,18 +54,15 @@ class UserPage extends Many(TabPage, ElementSearch){
     }
 
     getAllProjects(){
-        //browser.click(projects_dropdown_list);
-        //browser.click(show_all_projects_button);
-        //this.tab = ProjectAll;
+        browser.click(projects_dropdown_list);
+        browser.click(show_all_projects_button);
+        this.tab = ProjectAll;
     }
 
     getProjectCreationForm(){
         this.tab = new ProjectCreationForm();
     }
 
-    validateHeaderName(){
-        return browser.isExisting(header_name.replace('$(expected_name)', name))
-    }
 
     validateHeaderPrivacy(){
         return browser.isExisting(header_privacy.replace('$(privacy)', privacy))

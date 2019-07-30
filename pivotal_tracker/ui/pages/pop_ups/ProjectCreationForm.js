@@ -2,7 +2,6 @@ require('module-alias/register');
 const Many = require('extends-classes');
 const FormPage = require('@core_ui/pages/FormPage.js');
 const ActionPage = require('@core_ui/pages/ActionPage.js');
-const UserMainTabs = require('@pivotal_ui/pages/UserPage.js');
 
 let project_name_field = 'input[name="project_name"]';
 let account_selector_field = 'div[class="tc-account-selector"]';
@@ -63,8 +62,7 @@ class ProjectCreationForm extends Many(FormPage, ActionPage){
     }
 
     createProjec(){
-        browser.click(create_button);
-        //browser.waitForVisible(background_div);
+        browser.click(create_button)
         browser.pause(15000);
         return "ProjectMain";
     }

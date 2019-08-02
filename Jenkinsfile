@@ -28,7 +28,8 @@ echo $\'{
     }
     stage('build gradle') {
       steps {
-        sh 'gradle build'
+        sh '''cat pivotal_tracker/config.json
+gradle build'''
       }
     }
     stage('install dependencies and run tests') {
@@ -36,7 +37,21 @@ echo $\'{
         npm_config_cache = 'npm-cache'
       }
       steps {
-        sh 'gradle task npm_install npm_test'
+        sh 'gradle task npm_install'
+      }
+    }
+    stage('api_test') {
+      parallel {
+        stage('api test') {
+          steps {
+            sh 'gradle task api_test'
+          }
+        }
+        stage('gui test') {
+          steps {
+            sh 'gradle task gui_test'
+          }
+        }
       }
     }
   }

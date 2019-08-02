@@ -32,6 +32,10 @@ task npm_install(type: NpmTask){
     args = ['install']
 }
 
-task npm_test(type: NpmTask){
-    args = ['test']
+task api_test(type: NodeJsTask){
+    args = ['./node_modules/webdriverio/bin/wdio']
+}
+
+task gui_test(type: NodeJsTask){
+    args = ['./node_modules/cucumber/bin/cucumber-js', 'pivotal_tracker/api/features/*.feature']
 }

@@ -1,7 +1,7 @@
 require('module-alias/register');
 const Many = require('extends-classes');
-const FormPage = require('@core_ui/pages/FormPage.js');
-const ActionPage = require('@core_ui/pages/ActionPage.js');
+const FormPage = require(`@core_ui/pages/FormPage.js`);
+const ActionPage = require(`@core_ui/pages/ActionPage.js`);
 
 let project_name_field = 'input[name="project_name"]';
 let account_selector_field = 'div[class="tc-account-selector"]';
@@ -25,19 +25,18 @@ class ProjectCreationForm extends Many(FormPage, ActionPage){
             "privacy": (value) => {
                 this.changePrivacy(value);
             }
-        }
+        };
         this.actions = {
             "Create": () => {
                 this.createProjec();
             }
-        }
+        };
         this.updateFormFields(this.fields);
         this.updateActions(this.actions);
     }
 
     setAccount(value){
         browser.click(account_selector_field);
-        browser.pause(1000);
         browser.click(account_selected.replace('$(name)', value));
     }
 
@@ -62,8 +61,7 @@ class ProjectCreationForm extends Many(FormPage, ActionPage){
     }
 
     createProjec(){
-        browser.click(create_button)
-        browser.pause(15000);
+        browser.click(create_button);
         return "ProjectMain";
     }
 }

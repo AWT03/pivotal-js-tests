@@ -1,17 +1,12 @@
 require('module-alias/register');
 const Many = require('extends-classes');
-const TabPage = require('@core_ui/pages/TabPage.js');
-const ElementSearch = require('@core_ui/pages/ElementSearch.js');
-const DashboardPage = require('@pivotal_ui/pages/dashboard/DashboardPage.js');
-const ProjectMain = require('@pivotal_ui/pages/project_view/ProjectMain.js');
-const ProjectAll = require('@pivotal_ui/pages/project_view/ProjectsAll.js');
-const ProjectCreationForm = require('@pivotal_ui/pages/pop_ups/ProjectCreationForm.js');
+const TabPage = require(`@core_ui/pages/TabPage.js`);
+const ElementSearch = require(`@core_ui/pages/ElementSearch.js`);
+const DashboardPage = require(`@pivotal_ui/pages/dashboard/DashboardPage.js`);
 
 let go_dashboard_button = '.headerLogo__image';
-let projects_dropdown_list = '.tc_projects_dropdown_link.tc_context_name';
 let header_name = '//span[text()="$(expected_name)"]';
 let header_privacy = '//span[text()="($(privacy))"]';
-let show_all_projects_button = '//span[text()="Show All Projects"]';
 
 class UserPage extends Many(TabPage, ElementSearch){
 
@@ -19,27 +14,18 @@ class UserPage extends Many(TabPage, ElementSearch){
         super();
         this.search_elements = {
             "header_name": (name) => {
-                this.validateHeaderName(name)
+                UserPage.validateHeaderName(name)
             },
             "header_privacy": (privacy) => {
-                this.validateHeaderPrivacy(privacy)
+                UserPage.validateHeaderPrivacy(privacy)
 
             }
-        }
+        };
         this.tabs = {
             "Dashboard": () => {
                 this.getDashboardTab();
-            },
-            "ProjectMain": () => {
-                this.getProjectMainTab();
-            },
-            "AllProjects": () => {
-                this.getAllProjects();
-            },
-            "ProjectCreation": () => {
-                this.getProjectCreationForm();
             }
-        }
+        };
         this.tab = new DashboardPage();
 
     }
@@ -49,23 +35,11 @@ class UserPage extends Many(TabPage, ElementSearch){
         this.tab = new DashboardPage();
     }
 
-    getProjectMainTab(){
-        this.tab = new ProjectMain();
-    }
-
-    getAllProjects(){
-        browser.click(projects_dropdown_list);
-        browser.click(show_all_projects_button);
-        this.tab = ProjectAll;
-    }
-
-    getProjectCreationForm(){
-        this.tab = new ProjectCreationForm();
-    }
-
-
-    validateHeaderPrivacy(){
+    static validateHeaderPrivacy(privacy){
         return browser.isExisting(header_privacy.replace('$(privacy)', privacy))
+    }
+    static validateHeaderName(name){
+        return browser.isExisting(header_name.replace('$(privacy)', name))
     }
 }
 

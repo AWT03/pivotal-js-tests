@@ -34,8 +34,7 @@ async function DeleteObjects(username, tag) {
 }
 
 function ReadFileConfigPivotal(){
-    let config = ReadJsonFromFile(require('path').join(PivotalTrackerDir, 'config.json'));
-    return config;
+    return ReadJsonFromFile(require('path').join(PivotalTrackerDir, 'config.json'));
 }
 
 module.exports = {

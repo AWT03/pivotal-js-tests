@@ -1,19 +1,20 @@
 class Element{
 
     constructor(){
+        this.browser = browser
     }
 
     find_element(selector){
-        return browser.element(selector)
+        return this.browser.element(selector)
     }
 
     do_click(selector){
-        browser.click(selector)
+        this.browser.click(selector)
     }
 
     set_value(selector, value){
-        browser.setValue(selector,value)
+        this.browser.setValue(selector,value)
     }
 
 }
-module.exports = Element ;
+module.exports = Element;

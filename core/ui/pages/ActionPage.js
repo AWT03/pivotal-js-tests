@@ -1,5 +1,5 @@
 require('module-alias/register');
-const Element   = require('@core_ui/pages/Element.js');
+const Element   = require(`@core_ui/pages/Element.js`);
 
 class ActionPage extends Element {
     constructor() {
@@ -9,8 +9,7 @@ class ActionPage extends Element {
     }
 
     updateActions(actions){
-        for(let action in actions)
-            this.actions[action] = actions[action];
+        this.actions = Object.assign(this.actions, actions)
     }
 
     doAction(action){

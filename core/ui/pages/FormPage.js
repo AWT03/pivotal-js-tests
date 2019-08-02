@@ -1,5 +1,5 @@
 require('module-alias/register');
-const Element = require('@core_ui/pages/Element.js');
+const Element = require(`@core_ui/pages/Element.js`);
 
 class FormPage extends Element{
 
@@ -9,13 +9,12 @@ class FormPage extends Element{
     }
 
     updateFormFields(fields){
-        for (let field in fields)
-            this.formFields[field] = fields[field]
+        this.formFields = Object.assign(this.formFields, fields)
     }
 
     setForm(fields) {
         for(let tag in fields){
-            if(tag in this.formFields)
+            if (fields.hasOwnProperty(tag))
                 this.formFields[tag](fields[tag])
         }
     }

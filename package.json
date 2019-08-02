@@ -4,7 +4,7 @@
   "description": "Javascript Rest API Testing",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js pivotal_tracker/api/features/*.feature"
+    "test": "cucumber-js pivotal_tracker/api/features/*.feature && wdio"
   },
   "keywords": [],
   "author": "",

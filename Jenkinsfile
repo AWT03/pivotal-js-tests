@@ -7,7 +7,7 @@ pipeline {
   }
   stages {
     stage('generate credential') {
-	cd pivotal_tracker
+	sh '''cd pivotal_tracker
 	echo $'{
   		"base": "https://www.pivotaltracker.com/services/v5",
 		  "main_url": "https://www.pivotaltracker.com/signin",
@@ -24,7 +24,7 @@ pipeline {
 		      "password": "AWT03guitester*"
 		    }
 		  }
-		}' > config.json
+		}' > config.json'''
     }
     stage('install npm dependencies') {
       environment {

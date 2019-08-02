@@ -17,51 +17,52 @@ class ProjectCreationForm extends Many(FormPage, ActionPage){
         super();
         this.fields = {
             "project_name": (value) => {
-                browser.setValue(project_name_field, value);
+                this.set_value(project_name_field, value);
             },
             "account": (value) => {
-                this.setAccount(value);
+                this.set_account(value);
             },
             "privacy": (value) => {
-                this.changePrivacy(value);
+                this.change_privacy(value);
             }
         };
         this.actions = {
             "Create": () => {
-                this.createProjec();
+                this.create_project();
             }
         };
         this.updateFormFields(this.fields);
         this.updateActions(this.actions);
     }
 
-    setAccount(value){
-        browser.click(account_selector_field);
-        browser.click(account_selected.replace('$(name)', value));
+    set_account(value){
+        this.do_click(account_selector_field);
+        this.do_click(account_selected.replace('$(name)', value));
     }
 
-    changePrivacy(value){
+    change_privacy(value){
         if (value === "Public"){
-            this.checkPrivate();
+            this.check_private();
         }else if (value === "Private") {
-            this.checkPublic();
+            this.check_public();
         }
     }
 
-    checkPrivate(){
+    check_private(){
         if (! browser.isSelected(select_private_check)){
-            browser.click(select_private_check);
+            this.do_click(select_private_check);
         }
     }
 
-    checkPublic(){
+    check_public(){
         if (! (browser.isSelected(select_public_check))){
-            browser.click(select_public_check);
+            this.do_click(select_public_check);
         }
     }
 
-    createProjec(){
-        browser.click(create_button);
+    create_project(){
+        this.do_click(create_button);
+        browser.waitUntil(() => $(background_div).isVisible() === false);
         return "ProjectMain";
     }
 }

@@ -15,7 +15,8 @@ class LoginPage extends Many(FormPage, ActionPage, Element) {
         super();
         this.fields = {
             "sign_in_as": (username) => {
-                this.setUsername(username)
+                this.set_value(username_field, username);
+                this.do_click(signin_button)
             },
             "password": (password) => {
                 this.set_value(password_field, password)
@@ -23,21 +24,12 @@ class LoginPage extends Many(FormPage, ActionPage, Element) {
         };
         this.actions = {
             "Sign In": () => {
-                return this.signIn();
+                this.do_click(signin_button);
+                return new UserPage();
             }
         };
         this.updateFormFields(this.fields);
         this.updateActions(this.actions);
-    }
-
-    setUsername(username){
-        this.set_value(username_field, username);
-        this.do_click(signin_button)
-    }
-
-    signIn(){
-        this.do_click(signin_button);
-        return new UserPage();
     }
 }
 

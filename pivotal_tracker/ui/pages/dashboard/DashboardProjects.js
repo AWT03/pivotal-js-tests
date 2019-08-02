@@ -13,7 +13,7 @@ class DashboardProjects extends Many(ElementSearch, ActionPage){
         };
         this.actions = {
             "Create Project": () => {
-                DashboardProjects.openCreateProjectForm();
+                this.open_project_creation_form();
             }
         };
         this.updateActions(this.actions);
@@ -21,7 +21,7 @@ class DashboardProjects extends Many(ElementSearch, ActionPage){
     }
 
 
-    static openCreateProjectForm(){
+    open_project_creation_form(){
         this.do_click(create_project_button);
         return "ProjectCreation";
     }

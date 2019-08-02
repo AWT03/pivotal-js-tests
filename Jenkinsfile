@@ -7,7 +7,7 @@ pipeline {
       }
       steps {
         sh '''cd pivotal_tracker
-echo $\'{
+echo \'{
   "base": "https://www.pivotaltracker.com/services/v5",
   "main_url": "https://www.pivotaltracker.com/signin",
   "headers": {

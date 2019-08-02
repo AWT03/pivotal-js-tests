@@ -1,10 +1,8 @@
 require('module-alias/register');
-const Element = require(`@core_ui/pages/Element.js`);
 
-class FormPage extends Element{
+class FormPage{
 
     constructor() {
-        super();
         this.formFields = {};
     }
 

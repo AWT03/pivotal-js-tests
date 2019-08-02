@@ -1,19 +1,14 @@
 class Element{
 
     constructor(){
-        this.browser = browser
     }
 
-    find_element(selector){
-        return this.browser.element(selector)
+    static do_click(selector){
+        browser.click(selector)
     }
 
-    do_click(selector){
-        this.browser.click(selector)
-    }
-
-    set_value(selector, value){
-        this.browser.setValue(selector,value)
+    static set_value(selector, value){
+        browser.setValue(selector,value)
     }
 
 }

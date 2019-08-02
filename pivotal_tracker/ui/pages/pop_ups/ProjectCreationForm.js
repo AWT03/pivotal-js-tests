@@ -15,55 +15,33 @@ class ProjectCreationForm extends Many(FormPage, ActionPage){
 
     constructor(){
         super();
-        this.fields = {
-            "project_name": (value) => {
-                this.set_value(project_name_field, value);
+        this.formFields = {
+            "project_name":  (value) => {
+                browser.setValue(project_name_field, value);
             },
             "account": (value) => {
-                this.set_account(value);
+                browser.click(account_selector_field);
+                browser.click(account_selected.replace('$(name)', value));
             },
             "privacy": (value) => {
-                this.change_privacy(value);
+                if (value === "private"){
+                    if (! browser.isSelected(select_private_check)){
+                        browser.click(select_private_check);
+                    }
+                }else if (value === "public") {
+                    if (! (browser.isSelected(select_public_check))){
+                        browser.click(select_public_check);
+                    }
+                }
             }
         };
         this.actions = {
-            "Create": () => {
-                this.create_project();
+            "Create":  () => {
+                browser.click(create_button);
+                browser.waitUntil(() => $(background_div).isVisible() === false);
+                return "ProjectMain";
             }
-        };
-        this.updateFormFields(this.fields);
-        this.updateActions(this.actions);
-    }
-
-    set_account(value){
-        this.do_click(account_selector_field);
-        this.do_click(account_selected.replace('$(name)', value));
-    }
-
-    change_privacy(value){
-        if (value === "Public"){
-            this.check_private();
-        }else if (value === "Private") {
-            this.check_public();
         }
-    }
-
-    check_private(){
-        if (! browser.isSelected(select_private_check)){
-            this.do_click(select_private_check);
-        }
-    }
-
-    check_public(){
-        if (! (browser.isSelected(select_public_check))){
-            this.do_click(select_public_check);
-        }
-    }
-
-    create_project(){
-        this.do_click(create_button);
-        browser.waitUntil(() => $(background_div).isVisible() === false);
-        return "ProjectMain";
     }
 }
 

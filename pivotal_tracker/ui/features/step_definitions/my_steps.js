@@ -4,6 +4,15 @@ const LoginPage = require(`@pivotal_ui/pages/LoginPage.js`);
 const assert = require('assert');
 const {ReadFileConfigPivotal} = require(`@pivotal_utils/PivotalUtils.js`);
 const {SetupMainUrl} = require(`@core_utils/SetupBrowser.js`);
+const {FormatString} = require(`@pivotal_utils/PivotalUtils.js`);
+const {ReadJsonFromFile, DataTableToJson, DataTableToJsonList, JsonContains, JsonSchemaValidator} =
+    require(`@core_utils/Common.js`);
+
+function sleep(ms){
+    return new Promise(resolve=>{
+        setTimeout(resolve,ms)
+    })
+}
 
 Given('I login the app as {word}', async (user) => {
     let config = ReadFileConfigPivotal();
@@ -18,3 +27,10 @@ Given('I login the app as {word}', async (user) => {
 });
 
 
+When('I create a project with data:', async (table) => {
+    this.last_data = FormatString(JSON.stringify(DataTableToJson(table)));
+    this.page.doAction("Create Project");
+    this.page.tab.setForm(JSON.parse(this.last_data));
+    this.page.doAction("Create");
+    assert.strictEqual(true, true);
+});

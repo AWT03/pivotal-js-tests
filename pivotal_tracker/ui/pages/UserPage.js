@@ -2,6 +2,7 @@ require('module-alias/register');
 const Many = require('extends-classes');
 const TabPage = require(`@core_ui/pages/TabPage.js`);
 const ElementSearch = require(`@core_ui/pages/ElementSearch.js`);
+const Element = require(`@core_ui/pages/Element.js`);
 const DashboardPage = require(`@pivotal_ui/pages/dashboard/DashboardPage.js`);
 const ProjectCreationForm = require(`@pivotal_ui/pages/pop_ups/ProjectCreationForm.js`);
 
@@ -25,7 +26,7 @@ class UserPage extends Many(TabPage, ElementSearch){
         };
         this.tabs = {
             "Dashboard": () => {
-                this.do_click(go_dashboard_button);
+                browser.click(go_dashboard_button);
                 this.tab = new DashboardPage();
             },
             "ProjectCreation": () => {

@@ -178,8 +178,8 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    before: function (capabilities, specs) {
-        DeleteObjects("owner","project");
+    before: async function (capabilities, specs) {
+        await DeleteObjects("owner","project");
     },
     /**
      * Runs before a WebdriverIO command gets executed.
@@ -217,11 +217,11 @@ exports.config = {
      * Runs after a Cucumber scenario
      * @param {Object} scenario scenario details
      */
-    afterScenario: function (scenario) {
+    afterScenario: async function (scenario) {
         for (let tag in scenario.tags) {
             if (scenario.tags.hasOwnProperty(tag)){
                 if(scenario.tags[tag].name === "@clean_projects"){
-                    DeleteObjects("owner","project");
+                    await DeleteObjects("owner","project");
                 }
             }
         }
@@ -249,8 +249,8 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that ran
      */
-    after: function (result, capabilities, specs) {
-        // DeleteObjects("owner","project");
+    after: async function (result, capabilities, specs) {
+        await DeleteObjects("owner","project");
     },
     /**
      * Gets executed right after terminating the webdriver session.

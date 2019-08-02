@@ -40,18 +40,12 @@ gradle build'''
         sh 'gradle task npm_install'
       }
     }
-    stage('api_test') {
-      parallel {
-        stage('api test') {
-          steps {
-            sh 'gradle task api_test'
-          }
-        }
-        stage('gui test') {
-          steps {
-            sh 'gradle task gui_test'
-          }
-        }
+    stage('testing') {
+      environment {
+        npm_config_cache = 'npm-cache'
+      }
+      steps {
+        sh 'gradle task npm_test'
       }
     }
   }

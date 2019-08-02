@@ -27,9 +27,10 @@ class GenericApi {
      * @param body {string, object} the body that will be sent to the request
      * depending on content-type it can be a string or an object
      * @param headers {object} the headers that will be used for the request
+     * @param params request parameters
      * @returns {Promise<response>} resolve the promise once the request gets a response
      */
-    async do_request(http_method, body, headers){
+    async do_request(http_method, body, headers, params){
         return new Promise((resolve, reject) => {
             request({
                 url: this.url,

@@ -1,4 +1,5 @@
 require('module-alias/register');
+require(`@pivotal_utils/JsContext.js`);
 const {Given, When, Then} = require('cucumber');
 const LoginPage = require(`@pivotal_ui/pages/LoginPage.js`);
 const assert = require('assert');
@@ -18,19 +19,19 @@ Given('I login the app as {word}', async (user) => {
     let config = ReadFileConfigPivotal();
     let path = config["main_url"];
     SetupMainUrl(path);
-    this.page = new LoginPage();
-    this.page.setForm({
+    JsContext.page = new LoginPage();
+    JsContext.page.setForm({
         "sign_in_as": config["user"][user]["username"],
         "password": config["user"][user]["password"]
     });
-    this.page = this.page.doAction("Sign In");
+    JsContext.page = JsContext.page.doAction("Sign In");
 });
 
 
 When('I create a project with data:', async (table) => {
-    this.last_data = FormatString(JSON.stringify(DataTableToJson(table)));
-    this.page.doAction("Create Project");
-    this.page.tab.setForm(JSON.parse(this.last_data));
-    this.page.doAction("Create");
+    JsContext.last_data = FormatString(JSON.stringify(DataTableToJson(table)));
+    JsContext.page.doAction("Create Project");
+    JsContext.page.tab.setForm(JSON.parse(JsContext.last_data));
+    JsContext.page.doAction("Create");
     assert.strictEqual(true, true);
 });

@@ -14,6 +14,7 @@ Given('I start a connection with the Pivotal Tracker API', () => {
     JsContext.last_data = {};
     JsContext.already_existing = 0;
     JsContext.context_ids = [''];
+    JsContext.last_response = {};
     assert.strictEqual(true, true);
 });
 

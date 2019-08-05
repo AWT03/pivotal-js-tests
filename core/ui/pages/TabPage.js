@@ -17,8 +17,8 @@ class TabPage extends ActionPage{
         this.tabs[tab]();
     }
 
-    doAction(value) {
-        let switch_tab = this.tab.doAction(value);
+    doAction(value, params) {
+        let switch_tab = this.tab.doAction(value, params);
         if (switch_tab in this.tabs){
             this.goTo(switch_tab);
             return '';

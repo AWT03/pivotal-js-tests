@@ -10,9 +10,9 @@ class ActionPage {
         this.actions = Object.assign(this.actions, actions)
     }
 
-    doAction(action){
+    doAction(action, params){
         if(action in this.actions)
-            return this.actions[action]();
+            return this.actions[action](params);
     }
 }
 

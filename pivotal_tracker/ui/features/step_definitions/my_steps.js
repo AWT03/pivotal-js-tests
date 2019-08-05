@@ -15,7 +15,7 @@ function sleep(ms){
     })
 }
 
-Given('I login the app as {word}', async (user) => {
+Given('I login the pivotal tracker web page as {word}', async (user) => {
     let config = ReadFileConfigPivotal();
     let path = config["main_url"];
     SetupMainUrl(path);
@@ -33,5 +33,11 @@ When('I create a project with data:', async (table) => {
     JsContext.page.doAction("Create Project");
     JsContext.page.tab.setForm(JSON.parse(JsContext.last_data));
     JsContext.page.doAction("Create");
+    assert.strictEqual(true, true);
+});
+
+
+When('I open the last project created', async() => {
+    JsContext.page.doAction("Open Project", {"name": JSON.parse(JsContext.api.full_response)["name"]});
     assert.strictEqual(true, true);
 });

@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('generate credentials') {
+    stage('Generate Credentials') {
       environment {
         npm_config_cache = 'npm-cache'
       }
@@ -26,13 +26,12 @@ echo \'{
 }\' > config.json'''
       }
     }
-    stage('build gradle') {
+    stage('Build Gradle') {
       steps {
-        sh '''cat pivotal_tracker/config.json
-gradle build'''
+        sh 'gradle build'
       }
     }
-    stage('install dependencies and run tests') {
+    stage('Install NPM dependencies') {
       environment {
         npm_config_cache = 'npm-cache'
       }
@@ -40,12 +39,21 @@ gradle build'''
         sh 'gradle task npm_install'
       }
     }
-    stage('testing') {
-      environment {
-        npm_config_cache = 'npm-cache'
-      }
-      steps {
-        sh 'gradle task npm_test'
+    stage('Testing') {
+      parallel {
+        stage('API') {
+          environment {
+            npm_config_cache = 'npm-cache'
+          }
+          steps {
+            sh 'gradle task npm_api'
+          }
+        }
+        stage('GUI') {
+          steps {
+            sh 'gradle task npm_gui'
+          }
+        }
       }
     }
   }

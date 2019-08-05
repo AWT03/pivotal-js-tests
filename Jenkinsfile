@@ -40,20 +40,11 @@ echo \'{
       }
     }
     stage('Testing') {
-      parallel {
-        stage('API') {
-          environment {
-            npm_config_cache = 'npm-cache'
-          }
-          steps {
-            sh 'gradle task npm_api'
-          }
-        }
-        stage('GUI') {
-          steps {
-            sh 'gradle task npm_gui'
-          }
-        }
+      environment {
+        npm_config_cache = 'npm-cache'
+      }
+      steps {
+        sh 'gradle task npm_test'
       }
     }
   }

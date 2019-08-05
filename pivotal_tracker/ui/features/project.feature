@@ -5,5 +5,5 @@ Feature: Project
     When I login the app as owner
     And I create a project with data:
       | project_name    | (prefix)_project_(current_datetime) |
-      | account         | (prefix)_account                    |
+      | account         | (prefix)_GUI_account                |
       | privacy         | public                              |

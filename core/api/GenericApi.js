@@ -36,7 +36,8 @@ class GenericApi {
                 url: this.url,
                 method: http_method,
                 body: body,
-                headers: headers
+                headers: headers,
+                params: params
             }, (error, response, body) => {
                 this.full_response = body;
                 this.status_code = response.statusCode;

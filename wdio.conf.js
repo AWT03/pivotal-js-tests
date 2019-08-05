@@ -1,5 +1,8 @@
 require('module-alias/register');
 const {DeleteObjects} = require(`@pivotal_utils/PivotalUtils.js`);
+const {ReadJsonFromFile} = require(`@core_utils/Common.js`);
+const PivotalTrackerDir = require(`@pivotal/PivotalTrackerDir.js`);
+let account_id = ReadJsonFromFile(PivotalTrackerDir+'/config.json')["accounts"]["gui"].id;
 
 exports.config = {
 
@@ -182,7 +185,7 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
     before: async function (capabilities, specs) {
-        await DeleteObjects("owner","project");
+        await DeleteObjects("owner", "project", parseInt(account_id));
     },
     /**
      * Runs before a WebdriverIO command gets executed.
@@ -252,9 +255,9 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that ran
      */
-    // after: async function (result, capabilities, specs) {
-    //     await DeleteObjects("owner","project");
-    // },
+    after: async function (result, capabilities, specs) {
+        await DeleteObjects("owner", "project", parseInt(account_id));
+    },
     /**
      * Gets executed right after terminating the webdriver session.
      * @param {Object} config wdio configuration object

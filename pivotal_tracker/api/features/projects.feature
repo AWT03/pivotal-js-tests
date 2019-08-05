@@ -29,7 +29,8 @@ Feature: Projects
     Then I expect the status code is 200
     And I expect the schema is valid with schema_project
 
-  @functional
+  # Scenario fails when running in parallel with GUI Tests
+  @wip
   Scenario: Verify that I can get the information of various projects
     When I count the already existing projects
     And I send several POST requests to projects with data:

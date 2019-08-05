@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cucumber-js pivotal_tracker/api/features/*.feature && wdio",
-    "api": "cucumber-js pivotal_tracker/api/features/*.feature",
+    "api": "cucumber-js pivotal_tracker/api/features/*.feature -t @functional",
     "gui": "wdio"
   },
   "keywords": [],

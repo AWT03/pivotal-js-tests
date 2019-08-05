@@ -40,6 +40,6 @@ task npm_api(type: NpmTask){
     args = ['run-script', 'api']
 }
 
-task npm_test(type: NpmTask){
+task npm_gui(type: NpmTask){
     args = ['run-script', 'gui']
 }

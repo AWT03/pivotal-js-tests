@@ -35,3 +35,11 @@ task npm_install(type: NpmTask){
 task npm_test(type: NpmTask){
     args = ['test']
 }
+
+task npm_api(type: NpmTask){
+    args = ['run-script', 'api']
+}
+
+task npm_test(type: NpmTask){
+    args = ['run-script', 'gui']
+}

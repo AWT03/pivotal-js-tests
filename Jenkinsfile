@@ -43,7 +43,7 @@ echo \'{
     }
     stage('Build Gradle') {
       steps {
-        sh 'gradle build'
+        sh './gradlew build'
       }
     }
     stage('Install NPM dependencies') {
@@ -51,7 +51,7 @@ echo \'{
         npm_config_cache = 'npm-cache'
       }
       steps {
-        sh 'gradle task npm_install'
+        sh './gradlew task npm_install'
       }
     }
     stage('Testing') {
@@ -61,12 +61,12 @@ echo \'{
             npm_config_cache = 'npm-cache'
           }
           steps {
-            sh 'gradle task npm_api'
+            sh './gradlew task npm_api'
           }
         }
         stage('GUI') {
           steps {
-            sh 'gradle task npm_gui'
+            sh './gradlew task npm_gui'
           }
         }
       }

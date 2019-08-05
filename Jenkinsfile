@@ -22,6 +22,16 @@ echo \'{
       "username": "awt03guitester",
       "password": "AWT03guitester*"
     }
+  },
+  "accounts": {
+    "api": {
+      "id": "1103374",
+      "name": "AWT03_account"
+    },
+    "gui": {
+      "id": "1105215",
+      "name": "AWT03_GUI_account"
+    }
   }
 }\' > config.json'''
       }

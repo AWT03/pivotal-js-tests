@@ -13,5 +13,16 @@
       "username": "",
       "password": ""
     }
+  },
+  "accounts": {
+    "api": {
+      "id": "",
+      "name": ""
+    },
+    "gui": {
+      "id": "",
+      "name": ""
+    }
   }
 }
+

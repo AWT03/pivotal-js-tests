@@ -3,7 +3,8 @@ class Element{
     constructor(){
     }
 
-    static do_click(selector){
+    click(selector){
+        browser.waitForVisible(selector);
         browser.click(selector)
     }
 

@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'chrome:latest'
-    }
-
-  }
+  agent any
   stages {
     stage('Generate Credentials') {
       environment {

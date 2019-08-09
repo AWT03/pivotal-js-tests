@@ -3,17 +3,14 @@ class Element{
     constructor(){
     }
 
-    find_element(selector){
-        return browser.element(selector)
-    }
-
-    do_click(selector){
+    click(selector){
+        browser.waitForVisible(selector);
         browser.click(selector)
     }
 
-    set_value(selector, value){
+    static set_value(selector, value){
         browser.setValue(selector,value)
     }
 
 }
-module.exports = Element ;
+module.exports = Element;

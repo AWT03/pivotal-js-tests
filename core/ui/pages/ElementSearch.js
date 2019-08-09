@@ -1,15 +1,12 @@
 require('module-alias/register');
-const Element = require('@core_ui/pages/Element.js');
 
-class ElementSearch extends Element{
+class ElementSearch{
 
     constructor(){
-        super();
         this.search_elements = {};
     }
     updateSearchFields(fields){
-        for(let tag in fields)
-            this.search_elements[tag] = fields[tag]
+        this.search_elements = Object.assign(this.search_elements, fields)
     }
 
     isDisplayedAs(key,value){

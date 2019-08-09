@@ -1,5 +1,8 @@
 require('module-alias/register');
 const {DeleteObjects} = require(`@pivotal_utils/PivotalUtils.js`);
+const {ReadJsonFromFile} = require(`@core_utils/Common.js`);
+const PivotalTrackerDir = require(`@pivotal/PivotalTrackerDir.js`);
+let account_id = ReadJsonFromFile(PivotalTrackerDir+'/config.json')["accounts"]["gui"].id;
 
 exports.config = {
 
@@ -45,9 +48,12 @@ exports.config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 1,
+        maxInstances: 2,
         //
-        browserName: 'chrome'
+        browserName: 'chrome',
+        chromeOptions: {
+            args: ['--headless', '--disable-gpu', '--window-size=1280,800']
+        }
     }],
     //
     // ===================
@@ -75,7 +81,7 @@ exports.config = {
     bail: 0,
     //
     // Saves a screenshot to a given path if a command fails.
-    screenshotPath: './errorShots/',
+    //screenshotPath: './errorShots/',
     //
     // Set a base URL in order to shorten url command calls. If your `url` parameter starts
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
@@ -178,8 +184,8 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    before: function (capabilities, specs) {
-        DeleteObjects("owner","project");
+    before: async function (capabilities, specs) {
+        await DeleteObjects("owner", "project", parseInt(account_id));
     },
     /**
      * Runs before a WebdriverIO command gets executed.
@@ -217,12 +223,12 @@ exports.config = {
      * Runs after a Cucumber scenario
      * @param {Object} scenario scenario details
      */
-    afterScenario: function (scenario) {
-        let allTags = scenario.tags;
-        for (let tag in allTags) {
-            let tag_only = allTags[tag];
-            if(tag_only.name === "@clean_projects"){
-                DeleteObjects("owner","project");
+    afterScenario: async function (scenario) {
+        for (let tag in scenario.tags) {
+            if (scenario.tags.hasOwnProperty(tag)){
+                if(scenario.tags[tag].name === "@clean_projects"){
+                    await DeleteObjects("owner","project");
+                }
             }
         }
     },
@@ -249,8 +255,8 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that ran
      */
-    after: function (result, capabilities, specs) {
-        // DeleteObjects("owner","project");
+    after: async function (result, capabilities, specs) {
+        await DeleteObjects("owner", "project", parseInt(account_id));
     },
     /**
      * Gets executed right after terminating the webdriver session.
@@ -268,4 +274,4 @@ exports.config = {
      */
     // onComplete: function(exitCode, config, capabilities) {
     // }
-}
+};

@@ -1,6 +1,5 @@
 require('module-alias/register');
-const Element = require('@core_ui/pages/Element.js');
-const ActionPage = require('@core_ui/pages/ActionPage.js');
+const ActionPage = require(`@core_ui/pages/ActionPage.js`);
 
 class TabPage extends ActionPage{
 
@@ -11,16 +10,15 @@ class TabPage extends ActionPage{
     }
 
     updateTabs(tabs){
-        for(let tag in tabs)
-            this.tabs[tag]  = tabs[tag];
+        this.tabs = Object.assign(this.tabs, tabs)
     }
 
     goTo(tab){
         this.tabs[tab]();
     }
 
-    doAction(value) {
-        let switch_tab = this.tab.doAction(value);
+    doAction(value, params) {
+        let switch_tab = this.tab.doAction(value, params);
         if (switch_tab in this.tabs){
             this.goTo(switch_tab);
             return '';

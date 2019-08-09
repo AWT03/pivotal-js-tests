@@ -1,42 +1,43 @@
 require('module-alias/register');
+require(`@pivotal_utils/JsContext.js`);
 const {Given, When, Then} = require('cucumber');
-const LoginPage = require('@pivotal_ui/pages/LoginPage.js');
+const LoginPage = require(`@pivotal_ui/pages/LoginPage.js`);
 const assert = require('assert');
 const {ReadFileConfigPivotal} = require(`@pivotal_utils/PivotalUtils.js`);
-const {FormatString} = require(`@pivotal_utils/PivotalUtils.js`);
 const {SetupMainUrl} = require(`@core_utils/SetupBrowser.js`);
-const EndpointSaved = require('@core_ui/EndpointSaved.js');
+const {FormatString} = require(`@pivotal_utils/PivotalUtils.js`);
+const {ReadJsonFromFile, DataTableToJson, DataTableToJsonList, JsonContains, JsonSchemaValidator} =
+    require(`@core_utils/Common.js`);
 
-Given('I login the app as "{word}"', async (user) => {
+function sleep(ms){
+    return new Promise(resolve=>{
+        setTimeout(resolve,ms)
+    })
+}
+
+Given('I login the pivotal tracker web page as {word}', async (user) => {
     let config = ReadFileConfigPivotal();
     let path = config["main_url"];
     SetupMainUrl(path);
-    let login_page = new LoginPage;
-    this.page = login_page;
-    let config_user = config["user"];
-    let config_type_user = config_user[user];
-    let config_user_username = config_type_user["username"];
-    let config_user_password = config_type_user["password"];
-    let values_form = {
-        "sign_in_as":config_user_username,
-        "password":config_user_password
-    };
-    this.page.setForm(values_form);
-    this.page = this.page.doAction("Sign In");
+    JsContext.page = new LoginPage();
+    JsContext.page.setForm({
+        "sign_in_as": config["user"][user]["username"],
+        "password": config["user"][user]["password"]
+    });
+    JsContext.page = JsContext.page.doAction("Sign In");
 });
 
 
-When('I fill the form with data', async (table) => {
-    this.setValues = {}
-    let tableKeyValuesData = table.rowsHash();
-    for(let key in tableKeyValuesData){
-        let value = tableKeyValuesData[key];
-        value = FormatString(value);
-        this.setValues[key] = value;
-    }
-    this.page.doAction("Create Project");
-    this.page.goTo("ProjectCreation");
-    this.page.getTab().setForm(this.setValues);
-    this.page.doAction("Create");
+When('I create a project with data:', async (table) => {
+    JsContext.last_data = FormatString(JSON.stringify(DataTableToJson(table)));
+    JsContext.page.doAction("Create Project");
+    JsContext.page.tab.setForm(JSON.parse(JsContext.last_data));
+    JsContext.page.doAction("Create");
+    assert.strictEqual(true, true);
 });
 
+
+When('I open the last project created', async() => {
+    JsContext.page.doAction("Open Project", {"name": JSON.parse(JsContext.api.full_response)["name"]});
+    assert.strictEqual(true, true);
+});

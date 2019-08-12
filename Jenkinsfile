@@ -1,9 +1,4 @@
 pipeline {
-  agent {
-    docker {
-      image 'lgvaldez/ubuntu_chrome:1.0'
-    }
-  }
   stages {
     stage('Generate Credentials') {
       environment {

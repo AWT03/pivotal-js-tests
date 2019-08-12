@@ -2,7 +2,6 @@ pipeline {
   agent {
     docker {
       image 'lgvaldez/ubuntu_chrome:1.0'
-      args '--net calc_net --ip 10.0.0.11'
     }
   }
   stages {

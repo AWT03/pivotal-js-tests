@@ -1,39 +1,19 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'lgvaldez/ubuntu_chrome:1.0'
+      args '--net calc_net --ip 10.0.0.11'
+    }
+  }
   stages {
     stage('Generate Credentials') {
       environment {
         npm_config_cache = 'npm-cache'
       }
       steps {
-        sh '''cd pivotal_tracker
-echo \'{
-  "base": "https://www.pivotaltracker.com/services/v5",
-  "main_url": "https://www.pivotaltracker.com/signin",
-  "headers": {
-    "X-TrackerToken": "82470bcea3c50c14f0acdd2a40ddc1a9",
-    "Content-Type": "application/json"
-  },
-  "prefix": "AWT03",
-  "user": {
-    "owner": {
-      "id": "",
-      "token": "82470bcea3c50c14f0acdd2a40ddc1a9",
-      "username": "awt03guitester",
-      "password": "AWT03guitester*"
-    }
-  },
-  "accounts": {
-    "api": {
-      "id": "1103374",
-      "name": "AWT03_account"
-    },
-    "gui": {
-      "id": "1105215",
-      "name": "AWT03_GUI_account"
-    }
-  }
-}\' > config.json'''
+        withCredentials([file(credentialsId: 'pivotal_config', variable: 'config')]) {
+          sh "cp \$config pivotal_tracker/config.json"
+        }
       }
     }
     stage('Build Gradle') {

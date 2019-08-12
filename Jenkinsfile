@@ -15,11 +15,6 @@ pipeline {
         }
       }
     }
-    stage('Build Gradle') {
-      steps {
-        sh './gradlew build'
-      }
-    }
     stage('Install NPM dependencies') {
       environment {
         npm_config_cache = 'npm-cache'
@@ -39,6 +34,9 @@ pipeline {
           }
         }
         stage('GUI') {
+          environment {
+            npm_config_cache = 'npm-cache'
+          }
           steps {
             sh './gradlew task npm_gui'
           }

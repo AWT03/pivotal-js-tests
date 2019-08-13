@@ -14,6 +14,7 @@ class LoginPage extends Many(FormPage, ActionPage) {
         super();
         this.formFields = {
             "sign_in_as": (username) => {
+                browser.pause(5000)
                 browser.setValue(username_field, username);
                 browser.click(signin_button)
             },

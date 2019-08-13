@@ -3,6 +3,7 @@ const {DeleteObjects} = require(`@pivotal_utils/PivotalUtils.js`);
 const {ReadJsonFromFile} = require(`@core_utils/Common.js`);
 const PivotalTrackerDir = require(`@pivotal/PivotalTrackerDir.js`);
 let account_id = ReadJsonFromFile(PivotalTrackerDir+'/config.json')["accounts"]["gui"].id;
+let account_id_api = ReadJsonFromFile(PivotalTrackerDir+'/config.json')["accounts"]["api"].id;
 
 exports.config = {
 
@@ -74,7 +75,8 @@ exports.config = {
     coloredLogs: true,
     //
     // Warns when a deprecated command is used
-    deprecationWarnings: true,
+    // deprecationWarnings: true,
+    deprecationWarnings: false,
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
@@ -87,7 +89,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    baseUrl: 'https://www.pivotaltracker.com/signin',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 200000,
@@ -186,6 +188,7 @@ exports.config = {
      */
     before: async function (capabilities, specs) {
         await DeleteObjects("owner", "project", parseInt(account_id));
+        await DeleteObjects("owner", "project", parseInt(account_id_api));
     },
     /**
      * Runs before a WebdriverIO command gets executed.
@@ -205,8 +208,15 @@ exports.config = {
      * Runs before a Cucumber scenario
      * @param {Object} scenario scenario details
      */
-    // beforeScenario: function (scenario) {
-    // },
+    beforeScenario: async function (scenario) {
+        for (let tag in scenario.tags) {
+            if (scenario.tags.hasOwnProperty(tag)){
+                if(scenario.tags[tag].name === "@clean_projects"){
+                    await DeleteObjects("owner", "project", parseInt(account_id));
+                }
+            }
+        }
+    },
     /**
      * Runs before a Cucumber step
      * @param {Object} step step details
@@ -227,7 +237,8 @@ exports.config = {
         for (let tag in scenario.tags) {
             if (scenario.tags.hasOwnProperty(tag)){
                 if(scenario.tags[tag].name === "@clean_projects"){
-                    await DeleteObjects("owner","project");
+                    await DeleteObjects("owner", "project", parseInt(account_id));
+                    await DeleteObjects("owner", "project", parseInt(account_id_api));
                 }
             }
         }
@@ -257,6 +268,7 @@ exports.config = {
      */
     after: async function (result, capabilities, specs) {
         await DeleteObjects("owner", "project", parseInt(account_id));
+        await DeleteObjects("owner", "project", parseInt(account_id_api));
     },
     /**
      * Gets executed right after terminating the webdriver session.

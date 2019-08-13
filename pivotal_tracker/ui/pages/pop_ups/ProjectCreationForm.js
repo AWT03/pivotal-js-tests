@@ -21,14 +21,15 @@ class ProjectCreationForm extends Many(FormPage, ActionPage){
             },
             "account": (value) => {
                 browser.click(account_selector_field);
+                browser.pause(1000);
                 browser.click(account_selected.replace('$(name)', value));
             },
             "privacy": (value) => {
-                if (value === "private"){
+                if (value === "Private"){
                     if (! browser.isSelected(select_private_check)){
                         browser.click(select_private_check);
                     }
-                }else if (value === "public") {
+                }else if (value === "Public") {
                     if (! (browser.isSelected(select_public_check))){
                         browser.click(select_public_check);
                     }

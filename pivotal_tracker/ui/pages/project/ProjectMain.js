@@ -3,10 +3,11 @@ const TabPage = require(`@core_ui/pages/TabPage.js`);
 const DashboardProjects = require(`@pivotal_ui/pages/dashboard/DashboardProjects.js`);
 const DashboardWorkspaces = require(`@pivotal_ui/pages/dashboard/DashboardWorkspaces.js`);
 
-class DashboardPage extends TabPage{
+class ProjectMain extends TabPage{
 
     constructor(){
         super();
+
         this.tabs = {
             "Projects": () => {
                 this.getProjectsTab();
@@ -27,4 +28,4 @@ class DashboardPage extends TabPage{
     }
 }
 
-module.exports = DashboardPage;
+module.exports = ProjectMain;
